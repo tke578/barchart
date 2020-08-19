@@ -28,13 +28,17 @@ uoa.to_csv()
 
 ````
 #### Concerns
+The first time you ever run the render() method, it will download Chromium into your home directory (e.g. ~/.pyppeteer/). This only happens once.
+Additional necessary [linux packages](https://github.com/miyakogi/pyppeteer/issues/60) may need to be installed.
 
 Timeout issues do sometimes occur when fetching  with `asycnc` since data is loaded onto the DOM asynchronous.
 A Timeout Exception will be raised `barchart.helpers.errors.TimeoutError`
+At the moment, it takes about 1 minute to fetch and parse 10
 
 If a parsing exception is raised, create a issue ticket so I can take a look at.
 Parsing exceptions `barchart.helpers.errors.ParsingError: Parsing error: Index error on table headers, check response`
 
+At the moment, 
 Sometimes barchart likes to suppress most of their data at different times of day.
 
 
