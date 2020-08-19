@@ -7,7 +7,7 @@ from barchart.helpers.parser import UOAParse
 from barchart.helpers.errors import HttpErrors, TimeoutError, MissingParserType
 
 class AsyncRequest:
-	def __init__(self, base_url, number_of_requests, timeout=60, parser_type=None):
+	def __init__(self, base_url, number_of_requests, timeout=1000, parser_type=None):
 		self.base_url   		= base_url
 		self.number_of_requests = number_of_requests
 		self.parser_type 		= parser_type
@@ -29,11 +29,12 @@ class AsyncRequest:
 		response = await session.get(url, headers={'User-Agent': generate_user_agent()})
 		HttpErrors.handle_errors(response)
 		try:
-			response_url = await response.html.arender(timeout=self.timeout, script=self.js_script())
+			response_url = await response.html.arender(wait=5.0, timeout=self.timeout, script=self.js_script())
 		except pyppeteer.errors.TimeoutError:
 			raise TimeoutError
 
 		if self._is_unique_page_request(response.html.url, response_url):
+			print("This is the url " + response.html.url)
 			parser = self.parser_type(response)
 			parser.get_table_headers()
 			parser.get_table_body()

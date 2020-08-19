@@ -1,1 +1,9 @@
 *.pyc 
+*.csv
+*.txt
+barchart.egg-info
+__pycache__/
+
+# Distribution / packaging
+build/
+dist/
