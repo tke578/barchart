@@ -33,12 +33,11 @@ Additional necessary [linux packages](https://github.com/miyakogi/pyppeteer/issu
 
 Timeout issues do sometimes occur when fetching  with `asycnc` since data is loaded onto the DOM asynchronous.
 A Timeout Exception will be raised `barchart.helpers.errors.TimeoutError`
-At the moment, it takes about 1 minute to fetch and parse 10
+At the moment, it takes about 1 minute to fetch and parse 10-12 pages.
 
-If a parsing exception is raised, create a issue ticket so I can take a look at.
+If a parsing exception is raised, create a issue ticket.
 Parsing exceptions `barchart.helpers.errors.ParsingError: Parsing error: Index error on table headers, check response`
-
-At the moment, 
+ 
 Sometimes barchart likes to suppress most of their data at different times of day.
 
 
