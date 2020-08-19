@@ -34,7 +34,6 @@ class AsyncRequest:
 			raise TimeoutError
 
 		if self._is_unique_page_request(response.html.url, response_url):
-			print("This is the url " + response.html.url)
 			parser = self.parser_type(response)
 			parser.get_table_headers()
 			parser.get_table_body()
