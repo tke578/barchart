@@ -31,8 +31,11 @@ uoa.to_csv()
 
 Timeout issues do sometimes occur when fetching  with `asycnc` since data is loaded onto the DOM asynchronous.
 A Timeout Exception will be raised `barchart.helpers.errors.TimeoutError`
+
 If a parsing exception is raised, create a issue ticket so I can take a look at.
 Parsing exceptions `barchart.helpers.errors.ParsingError: Parsing error: Index error on table headers, check response`
+
+Sometimes barchart likes to suppress most of their data at different times of day.
 
 
 
