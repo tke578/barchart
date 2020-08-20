@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setup(name='barchart',
 	    packages=['barchart'],
-      version='',
+      version='0.1.0',
       description='The Unofficial API for barchart.com',
       long_description=long_description,
       long_description_content_type="text/markdown",
