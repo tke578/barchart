@@ -2,7 +2,9 @@
 *The Unofficial API for barchart.com*
 
 [![Build Status](https://travis-ci.org/tke578/barchart.svg?branch=master)](https://travis-ci.org/tke578/barchart)
+[![PyPI version](https://badge.fury.io/py/barchart.svg)](https://badge.fury.io/py/barchart)
 [![Python version](https://img.shields.io/badge/Python-3.8-blue.svg)](https://shields.io/)
+[![Downloads](https://pepy.tech/badge/barchart)](https://pepy.tech/project/barchart)
 
 
 Installation
