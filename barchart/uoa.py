@@ -9,7 +9,6 @@ from barchart.helpers.parser import UOAParse
 from barchart.helpers.async_request import AsyncRequest
 
 UOA_BASE_URL = 'https://www.barchart.com/options/unusual-activity/stocks'
-# UOA_BASE_URL = 'https://www.barchart.com/options/naked-puts'
 
 class UOA:
 	def __init__(self, timeout=100):
