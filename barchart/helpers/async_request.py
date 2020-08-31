@@ -43,13 +43,15 @@ class AsyncRequest:
 
 	async def main(self):
 		"""Runs subsequent requests after the initial request"""
-		tasks = []
+		#network erros occuring when multiple tasks created pyppeteer.errors.NetworkError
+		# tasks = []
 		for i in range(2, self.number_of_requests+2):
 			url = self.base_url +f'/?page={i}'
-			tasks.append(
-				self.make_requests(url)
-			)
-		results = await asyncio.gather(*tasks)
+			await self.make_requests(url)
+		# 	tasks.append(
+		# 		self.make_requests(url)
+		# 	)
+		# results = await asyncio.gather(*tasks)
 
 	def js_script(self):
 		"""Gets the web page url by javascript"""

@@ -5,8 +5,8 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(name='barchart',
-	    packages=['barchart'],
-      version='0.1.0',
+	    packages=['barchart', 'barchart.helpers'],
+      version='0.1.3',
       description='The Unofficial API for barchart.com',
       long_description=long_description,
       long_description_content_type="text/markdown",
