@@ -17,6 +17,10 @@ class HttpErrors:
 		except pyppeteer.errors.TimeoutError:
 			raise TimeoutError(msg='Timeout exceeded, try increasing the timeout value.')
 
+class InvalidWebDriverPathValue(Exception):
+	"""Raise when timeout value is invalid"""
+	def __init__(self, val):
+		super(InvalidWebDriverPathValue, self).__init__(f'Webdriver path value cannot be empty and or must be a string: {val}')
 
 class InvalidTimeoutValue(Exception):
 	"""Raise when timeout value is invalid"""

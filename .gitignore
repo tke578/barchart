@@ -3,7 +3,9 @@
 *.txt
 barchart.egg-info
 __pycache__/
-
+barchart/__pycache__/
 # Distribution / packaging
 build/
 dist/
+
+*.log

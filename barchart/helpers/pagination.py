@@ -11,7 +11,8 @@ class Pagination:
 	def get_pagination(self):
 		"""Retrieves the total amount of records and per page; occasionaly, pagianted_text will be empty"""
 		try:
-			paginated_text 		= self._body_response.html.find('.pagination-info')[0].text
+			#paginated_text 		= self._body_response.html.find('.pagination-info')[0].text
+			paginated_text 		= self._body_response.find_elements_by_class_name('pagination-info')[0].text
 			self.total_records	= int(re.search('of(.*)', paginated_text).group(1).strip())
 			self.per_page  		= int(re.search('-(.*)of', paginated_text).group(1).strip())
 		except:

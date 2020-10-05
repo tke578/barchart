@@ -1,8 +1,10 @@
 import json
-import asyncio
-import  pyppeteer
+#import asyncio
+#import  pyppeteer
+from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
 from user_agent import generate_user_agent
-from requests_html import AsyncHTMLSession
+#from requests_html import AsyncHTMLSession
 from barchart.helpers.parser import UOAParse
 from barchart.helpers.errors import HttpErrors, TimeoutError, MissingParserType
 
