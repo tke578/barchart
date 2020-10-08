@@ -11,7 +11,7 @@ from user_agent import generate_user_agent
 from barchart.helpers.errors import InvalidWebDriverPathValue, InvalidTimeoutValue, HttpErrors, ParsingError
 from barchart.helpers.pagination import Pagination
 from barchart.helpers.parser import UOAParse
-from barchart.helpers.async_request import AsyncRequest
+from barchart.helpers.request import Request
 
 UOA_BASE_URL = 'https://www.barchart.com/options/unusual-activity/stocks'
 
@@ -61,9 +61,9 @@ class UOA:
 			browser.quit()
 
 		if self._has_pagination():
-			async_req = AsyncRequest(UOA_BASE_URL, self._pages_to_paginate, webdriver_path=self.webdriver_path, parser_type=UOAParse)
-			async_req.run()
-			self.data.extend(async_req.data)
+			req = Request(UOA_BASE_URL, self._pages_to_paginate, webdriver_path=self.webdriver_path, parser_type=UOAParse)
+			req.run()
+			self.data.extend(req.data)
 
 	def _parse_table_headers_body(self, browser):
 		WebDriverWait(browser,10).until(EC.presence_of_element_located((By.XPATH, '//table/thead/tr')))

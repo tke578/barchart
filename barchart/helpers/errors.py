@@ -1,6 +1,3 @@
-import  pyppeteer
-
-
 class HttpErrors:
 
 	def handle_errors(response):

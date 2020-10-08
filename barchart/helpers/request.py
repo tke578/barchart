@@ -8,7 +8,7 @@ from user_agent import generate_user_agent
 from barchart.helpers.parser import UOAParse
 from barchart.helpers.errors import HttpErrors, TimeoutError, MissingParserType
 
-class AsyncRequest:
+class Request:
 	def __init__(self, base_url, number_of_requests, webdriver_path=None, parser_type=None):
 		self.webdriver_path 	= webdriver_path
 		self.base_url   		= base_url
