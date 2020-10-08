@@ -1,16 +1,16 @@
 from barchart.helpers.errors import ParsingError
 
 class BaseParser:
-	def __init__(self, body, spaced_headers=[]):
+	def __init__(self, body):
 		self.body 				= body
 		self.table_headers 		= None
-		self.spaced_headers 	= spaced_headers
 		self.data 				= []
 
 	
 class UOAParse(BaseParser):
-	def __init__(self, body, spaced_headers):
-		super(UOAParse, self).__init__(body, spaced_headers)
+	def __init__(self, body):
+		self.spaced_headers = ['Exp Date', 'Open Int', 'Last Trade']
+		super(UOAParse, self).__init__(body)
 
 	def get_table_headers(self):
 		"""Returns array of table header titles"""

@@ -16,10 +16,8 @@ setup(name='barchart',
       keywords = ['barchart', 'api', 'screener', 'barchart api', 'options', 'unusual options activity'],
       license='MIT',
       install_requires=[
-          'requests_html',
-          'async',
-          'user_agent',
-          'pyppeteer'
+          'selenium',
+          'user_agent'
       ],
       test_suite='nose.collector',
       tests_require=['nose'],
