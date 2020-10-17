@@ -55,22 +55,46 @@ class UOA:
 		browser = webdriver.Firefox(firefox_profile=profile, options=options, executable_path=self.webdriver_path)
 		try:
 			browser.get(UOA_BASE_URL)
-			self._parse_table_headers_body(browser)
-			self._parse_pagination(browser)
+			current_page = 1
+			while True:
+				WebDriverWait(browser,10).until(EC.presence_of_element_located((By.CLASS_NAME, 'next')))
+				if browser.find_elements_by_class_name('next')[0].text:
+					parse = self._parse_table_headers_body(browser)
+					self.data += parse
+					print('Current page ', current_page)
+					print(browser.current_url)
+					current_page += 1
+					browser.get(UOA_BASE_URL+f'?page={current_page}')
+				else:
+					parse = self._parse_table_headers_body(browser)
+					print('Current page ', current_page)
+					print(browser.current_url)
+					self.data += parse
+					print("No more pages")
+					break
+
+			#import pdb; pdb.set_trace()
+			#self._parse_table_headers_body(browser)
+			#self._parse_pagination(browser)
+
+		except IndexError:
+			print("No Pagination")
+
 		finally:
 			browser.quit()
 
-		if self._has_pagination():
-			req = Request(UOA_BASE_URL, self._pages_to_paginate, webdriver_path=self.webdriver_path, parser_type=UOAParse)
-			req.run()
-			self.data.extend(req.data)
+		# if self._has_pagination():
+		# 	req = Request(UOA_BASE_URL, self._pages_to_paginate, webdriver_path=self.webdriver_path, parser_type=UOAParse)
+		# 	req.run()
+		# 	self.data.extend(req.data)
 
 	def _parse_table_headers_body(self, browser):
-		WebDriverWait(browser,10).until(EC.presence_of_element_located((By.XPATH, '//table/thead/tr')))
+		# WebDriverWait(browser,10).until(EC.presence_of_element_located((By.XPATH, '//table/thead/tr')))
 		parser = UOAParse(browser)
 		parser.get_table_headers()
 		parser.get_table_body()
-		self.data = parser.data
+		return parser.data
+		# self.data = parser.data
 
 	def _parse_pagination(self, browser):
 		WebDriverWait(browser,10).until(EC.presence_of_element_located((By.CLASS_NAME, 'pagination-info')))
