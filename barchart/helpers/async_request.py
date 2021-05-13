@@ -7,11 +7,12 @@ from barchart.helpers.parser import UOAParse
 from barchart.helpers.errors import HttpErrors, TimeoutError, MissingParserType
 
 class AsyncRequest:
-	def __init__(self, base_url, number_of_requests, timeout=1000, parser_type=None):
+	def __init__(self, base_url, number_of_requests, timeout=1000, parser_type=None, user_agent=None):
 		self.base_url   		= base_url
 		self.number_of_requests = number_of_requests
 		self.parser_type 		= parser_type
 		self.timeout			= timeout
+		self.user_agent         = user_agent
 		self.data				= []
 
 	@property
@@ -25,11 +26,11 @@ class AsyncRequest:
 		self._parser_type = data
 	
 	async def make_requests(self, url):
-		session = AsyncHTMLSession()
-		response = await session.get(url, headers={'User-Agent': generate_user_agent()})
+		session = AsyncHTMLSession(browser_args=["--no-sandbox", f'--user-agent=self.user_agent'])
+		response = await session.get(url)
 		HttpErrors.handle_errors(response)
 		try:
-			response_url = await response.html.arender(wait=5.0, timeout=self.timeout, script=self.js_script())
+			response_url = await response.html.arender(timeout=self.timeout, script=self.js_script())
 		except pyppeteer.errors.TimeoutError:
 			raise TimeoutError
 
@@ -43,15 +44,9 @@ class AsyncRequest:
 
 	async def main(self):
 		"""Runs subsequent requests after the initial request"""
-		#network erros occuring when multiple tasks created pyppeteer.errors.NetworkError
-		# tasks = []
 		for i in range(2, self.number_of_requests+2):
 			url = self.base_url +f'/?page={i}'
 			await self.make_requests(url)
-		# 	tasks.append(
-		# 		self.make_requests(url)
-		# 	)
-		# results = await asyncio.gather(*tasks)
 
 	def js_script(self):
 		"""Gets the web page url by javascript"""
