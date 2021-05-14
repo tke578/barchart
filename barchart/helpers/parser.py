@@ -16,9 +16,9 @@ class UOAParse(BaseParser):
 		try:
 			self.table_headers = self.body.html.find('table thead tr')[0].text.split('\n')[0:16]
 		except IndexError:
-			raise ParsingError(msg='Index error on parsing table headers, html response is malformed')
+			raise ParsingError(msg=self.body.html.text+'\n\n\nIndex error on parsing table headers, check html response above')
 		if len(self.table_headers) < 16:
-			raise ParsingError(msg='table headers collection is less than 16, check response')
+			raise ParsingError(msg=self.body.html.text+'\n\n\ntable headers collection is less than 16, check html response above')
 
 	def get_table_body(self):
 		"""Returns collection of table body data"""
@@ -27,8 +27,8 @@ class UOAParse(BaseParser):
 			try:
 				row_data = row.text.split('\n')[0:]
 				if len(row_data) < 16:
-					raise ParsingError(msg='table body collection is less than 16, check response')
+					raise ParsingError(msg=self.body.html.text+'\n\n\ntable body collection is less than 16, check html response above')
 				obj_struct = dict(zip(self.table_headers, row_data))
 				self.data.append(obj_struct)
 			except IndexError:
-				raise ParsingError(msg='Index error on table body, check response')
+				raise ParsingError(msg=self.body.html.text+'\n\n\nIndex error on table body, check html response above')
