@@ -23,6 +23,11 @@ class InvalidTimeoutValue(Exception):
 	def __init__(self, val):
 		super(InvalidTimeoutValue, self).__init__(f'Timeout value cannot be empty and/or less than 1: {val}')
 
+class InvalidUserAgentValue(Exception):
+	"""Raise when user agent value is invalid"""
+	def __init__(self, val):
+		super(InvalidUserAgentValue, self).__init__(f'User Agent value cannot be empty or non string type: {val}')
+
 class TimeoutError(Exception):
 	"""Raise on timeout"""
 	def __init__(self, msg=''):

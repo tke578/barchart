@@ -1,6 +1,8 @@
 *.pyc 
 *.csv
 *.txt
+*.log
+*.pyc 
 barchart.egg-info
 __pycache__/
 
